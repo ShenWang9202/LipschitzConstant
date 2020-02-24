@@ -4,11 +4,17 @@ close all;
 start_toolkit
 
 %% Select networks and nail down the parameters
-inpNameIndex = 1;
+inpNameIndex = 2;
 switch inpNameIndex
     case 1
         disp('3-node network')
         inpname='Threenodes.inp';
+        
+        PumpEquation = [393.7008 -3.746E-006 2.59;];
+        
+    case 2
+        disp('tutorial 8node')
+        inpname='tutorial8node.inp';
         
         PumpEquation = [393.7008 -3.746E-006 2.59;];
     otherwise
@@ -101,13 +107,7 @@ nu_vector = PumpEquation(:,3);
 % assume speed is 1;
 s = 1;
 q_max = s.* (hs_vector./r_vector).^(1/nu_vector);
-
-
-
-
-
-
-
 %% Find Lipschtiz Constant for all pipes
 
 K_P = FindLipschitz4Pipes(d,q_max);
+K_M = FindLipschitz4Pumps(q_max,PumpEquation);
