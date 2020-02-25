@@ -4,7 +4,7 @@ close all;
 start_toolkit
 
 %% Select networks and nail down the parameters
-inpNameIndex = 3;
+inpNameIndex = 6;
 switch inpNameIndex
     case 1
         disp('3-node network')
@@ -121,15 +121,29 @@ LinkLengthPipe = LinkLength(PipeIndex);
 
 %% Find the q_min and q_max for all networks
 
-
+if (~isempty(PumpEquation))
 hs_vector = PumpEquation(:,1);
 r_vector = -PumpEquation(:,2);
 nu_vector = PumpEquation(:,3);
+end
 
 % assume speed is 1;
-s = 1;
-q_max = s.* (hs_vector./r_vector).^(1/nu_vector);
-q_min = -q_max;
+% s = 1;
+% q_max = s.* (hs_vector./r_vector).^(1/nu_vector);
+% q_min = -q_max;
+
+Flows_Pipes = Flows(:,PipeIndex);
+q_min_Pipes = min(Flows_Pipes);
+q_max_Pipes = max(Flows_Pipes);
+q_min_Pipes = q_min_Pipes';
+q_max_Pipes = q_max_Pipes';
+
+Flows_Pumps = Flows(:,PumpIndex);
+q_min_Pumps = min(Flows_Pumps);
+q_max_Pumps = max(Flows_Pumps);
+q_min_Pumps = q_min_Pumps';
+q_max_Pumps = q_max_Pumps';
+
 %% Find Lipschtiz Constant for all pipes
 
 
@@ -181,5 +195,10 @@ Headloss_pipe_R = 4.727 * L_pipe./((C_pipe*Volum_conversion).^(mu))./(D_pipe.^(4
 
 
 %
-K_P = FindLipschitz4Pipes_v2(q_max,Headloss_pipe_R,mu,PipeCount)
-K_M = FindLipschitz4Pumps_v2(q_max,PumpEquation)
+K_P = FindLipschitz4Pipes_v2(q_min_Pipes,q_max_Pipes,Headloss_pipe_R,mu)
+
+if (~isempty(PumpEquation))
+K_M = FindLipschitz4Pumps_v2(q_min_Pumps,q_max_Pumps,PumpEquation)
+else
+    disp('No pump, no K_M')
+end
