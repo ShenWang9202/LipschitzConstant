@@ -4,7 +4,7 @@ close all;
 start_toolkit
 
 %% Select networks and nail down the parameters
-inpNameIndex = 6;
+inpNameIndex = 2;
 switch inpNameIndex
     case 1
         disp('3-node network')
@@ -166,26 +166,13 @@ Volum_conversion = Constants4WDN.GPM2CFS;
 PipeIndex = d.getLinkPipeIndex;
 PipeCount = d.getLinkPipeCount;
 
+PumpCount = d.getLinkPumpCount;
+
 L_pipe = L_pipe(PipeIndex);
 D_pipe = D_pipe(PipeIndex)/diameter_conversion;
 C_pipe = C_pipe(PipeIndex);
 
-switch inpNameIndex
-    case 1
-        save '3-node-Lipschtiz.mat';
-    case 2
-        save '8-node-Lipschtiz.mat';
-    case 3
-        save 'anytown-Lipschtiz.mat';
-    case 4
-        save 'net2-Lipschtiz.mat';
-    case 5
-        save 'net3-Lipschtiz.mat';
-    case 6
-        save 'OBCL-Lipschtiz.mat';
-    otherwise
-        disp('other value')
-end
+
 
 %%
 
@@ -193,8 +180,27 @@ end
 mu = 2;
 Headloss_pipe_R = 4.727 * L_pipe./((C_pipe*Volum_conversion).^(mu))./(D_pipe.^(4.871));
 
+% switch inpNameIndex
+%     case 1
+%         save '3-node-Lipschtiz.mat';
+%     case 2
+%         save '8-node-Lipschtiz.mat';
+%     case 3
+%         save 'anytown-Lipschtiz.mat';
+%     case 4
+%         save 'net2-Lipschtiz.mat';
+%     case 5
+%         save 'net3-Lipschtiz.mat';
+%     case 6
+%         save 'OBCL-Lipschtiz.mat';
+%     otherwise
+%         disp('other value')
+% end
 
 %
+
+disp('Analytical solution:')
+
 K_P = FindLipschitz4Pipes_v2(q_min_Pipes,q_max_Pipes,Headloss_pipe_R,mu)
 
 if (~isempty(PumpEquation))
@@ -202,3 +208,5 @@ K_M = FindLipschitz4Pumps_v2(q_min_Pumps,q_max_Pumps,PumpEquation)
 else
     disp('No pump, no K_M')
 end
+
+

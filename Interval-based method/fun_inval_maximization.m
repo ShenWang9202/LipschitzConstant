@@ -95,7 +95,7 @@ while ((S_hi.ub-L) > eps_F) && ~is_atomic_hrec(S_hi,eps_X) && (iter_ctr_1 < max_
     end
     
     %Update counter
-    iter_ctr_1 = iter_ctr_1 + 1
+    iter_ctr_1 = iter_ctr_1 + 1;
 end
 
 %Find S with biggest lower bound from Cov
