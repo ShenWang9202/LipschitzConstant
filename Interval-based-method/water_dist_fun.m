@@ -46,7 +46,7 @@ switch type
         for i = 1:param.PipeCount
             sum = sum + (param.mu*param.Headloss_pipe_R(i)*abs(q(i))^(param.mu-1))^2;
         end
-        for i = param.PipeCount+1:param.PipeCount+length(param.r_vector)
+        for i = param.PipeCount+1:param.PipeCount+ param.PumpCount
             sum = sum + (param.nu_vector(i-param.PipeCount)*param.r_vector(i-param.PipeCount)*(q(i))^(param.nu_vector(i-param.PipeCount)-1)*(1))^2;
         end
         out = sum;

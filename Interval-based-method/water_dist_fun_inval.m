@@ -17,7 +17,7 @@ switch type
             A3 = inv_pow(A2,2);
             sum = inv_add(sum,A3);
         end 
-        for i = param.PipeCount+1:param.PipeCount+length(param.r_vector)
+        for i = param.PipeCount + 1:param.PipeCount + param.PumpCount
             A1 = inv_pow(Q{i},param.nu_vector(i-param.PipeCount)-1);
             A2 = inv_mul_c(inv_mul_c(A1,param.r_vector(i-param.PipeCount)),param.nu_vector(i-param.PipeCount));
             A3 = inv_pow(A2,2);

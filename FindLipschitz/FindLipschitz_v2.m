@@ -1,10 +1,8 @@
-clc;
-clear;
-close all;
+
 start_toolkit
 
 %% Select networks and nail down the parameters
-inpNameIndex = 2;
+
 switch inpNameIndex
     case 1
         disp('3-node network')
@@ -201,12 +199,28 @@ Headloss_pipe_R = 4.727 * L_pipe./((C_pipe*Volum_conversion).^(mu))./(D_pipe.^(4
 
 disp('Analytical solution:')
 
-K_P = FindLipschitz4Pipes_v2(q_min_Pipes,q_max_Pipes,Headloss_pipe_R,mu)
+K_P = FindLipschitz4Pipes_v2(q_min_Pipes,q_max_Pipes,Headloss_pipe_R,mu);
 
+disp('The overall Lipschitz constant from Pipes is')
+K_P
+
+disp('The overall Lipschitz constant from Pumps is')
 if (~isempty(PumpEquation))
 K_M = FindLipschitz4Pumps_v2(q_min_Pumps,q_max_Pumps,PumpEquation)
 else
     disp('No pump, no K_M')
 end
+
+disp('The overall Lipschitz constant is')
+
+if (~isempty(PumpEquation))
+    max(K_P,K_M)
+else
+    K_P
+end
+
+
+
+
 
 

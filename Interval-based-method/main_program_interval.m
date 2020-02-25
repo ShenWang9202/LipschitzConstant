@@ -31,25 +31,25 @@ switch case_study
 %         load('anytown-Lipschtiz.mat');
         %Epsilons for stopping criteria
         eps_X = [10^-3];
-        eps_F = [2*10^0];
+        eps_F = [1*10^0];
         max_iter = Inf;
     case 4
 %         load('net2-Lipschtiz.mat');
         %Epsilons for stopping criteria
         eps_X = [10^-3];
-        eps_F = [1*10^0];
+        eps_F = [1*10^-5];
         max_iter = Inf;
     case 5
 %         load('net3-Lipschtiz.mat');
         %Epsilons for stopping criteria
         eps_X = [10^-3];
-        eps_F = [1*10^0];
+        eps_F = [1*10^-2];
         max_iter = Inf;
     case 6
 %         load('OBCL-Lipschtiz.mat');
         %Epsilons for stopping criteria
         eps_X = [10^-3];
-        eps_F = [1*10^0];
+        eps_F = [1*10^-1];
         max_iter = Inf;
     otherwise
         disp('other value');
@@ -58,8 +58,10 @@ end
 %Set constant data
 param.mu = mu;
 param.Headloss_pipe_R =Headloss_pipe_R;
-param.r_vector = r_vector;
-param.nu_vector = nu_vector;
+if PumpCount> 0
+    param.r_vector = r_vector;
+    param.nu_vector = nu_vector;
+end
 param.PipeCount = PipeCount;
 param.PumpCount = PumpCount;
 param.q_max = [q_max_Pipes ;q_max_Pumps];
@@ -89,21 +91,21 @@ for i = 1:length(eps_F)
     
     %Compute Lipschitz constant for pipes + pumps
     %Define domain X for pipes
-    for j = 1:param.PipeCount
+    for j = 1:param.PipeCount + param.PumpCount
         Xset.dim(j).l = param.q_min(j);
         Xset.dim(j).u = param.q_max(j);
     end
-    %Define domain X for pumps
-    for j = param.PipeCount+1:param.PipeCount+length(param.r_vector)
-        Xset.dim(j).l = param.q_min(j);
-        Xset.dim(j).u = param.q_max(j);
-    end
+%     %Define domain X for pumps
+%     for j = param.PipeCount+1:param.PumpCount
+%         Xset.dim(j).l = param.q_min(j);
+%         Xset.dim(j).u = param.q_max(j);
+%     end
     
     nonlinear_type = 12; %pipes and pumps
     
     tic
     %Compute the maximum of the squared norm of gradient vector for each
-    result{1} = fun_inval_maximization(Xset,param,nonlinear_type,param.PipeCount+length(param.r_vector),eps_F(i),eps_X(i),max_iter);
+    result{1} = fun_inval_maximization(Xset,param,nonlinear_type,param.PipeCount+param.PumpCount,eps_F(i),eps_X(i),max_iter);
     totalTime = totalTime + toc;
     
     %Compute the Lipschitz constant

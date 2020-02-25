@@ -8,6 +8,9 @@ q_min_Pipes = abs(q_min_Pipes);
 k_P = mu* Headloss_pipe_R.*((q_min_Pipes).^(mu-1));
 K_P = [K_P; k_P];
 
+
+q_max_Pipes = abs(q_max_Pipes);
+
 k_P = mu* Headloss_pipe_R.*((q_max_Pipes).^(mu-1));
 K_P = [K_P; k_P];
 
