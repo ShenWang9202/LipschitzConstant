@@ -27,6 +27,14 @@ switch param.case_study
         str_case = '3_node.mat';
     case 2
         str_case = '8_node.mat';
+    case 3
+        str_case = 'Anytown.mat';
+    case 4
+        str_case = 'Net2.mat';
+    case 5
+        str_case = 'Net3.mat';
+    case 6
+        str_case = 'OBCL.mat';
     otherwise
         str_case = 'other value';
 end
