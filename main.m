@@ -1,9 +1,17 @@
+% Main Program
+% Lipschitz constant computation using Analytical, interval-based, and
+% point-based method
+% System: water distribution system model
+% Author: Shen Wang
+% Date: 2/27/2020
+
+
 clc;
 clear;
 close all;
 
 
-for  inpNameIndex = 1:1
+for  inpNameIndex = 1:6
     switch inpNameIndex
         case 1
             disp('Threenodes.inp');

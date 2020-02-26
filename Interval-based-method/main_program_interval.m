@@ -47,14 +47,14 @@ switch case_study
         %         load('net3-Lipschtiz.mat');
         %Epsilons for stopping criteria
         eps_X = [10^-3];
-        eps_F = [1*10^-2];
+        eps_F = [5*10^-2];
         max_iter = Inf;
         str_case = 'Net3.mat';
     case 6
         %         load('OBCL-Lipschtiz.mat');
         %Epsilons for stopping criteria
         eps_X = [10^-3];
-        eps_F = [1*10^-1];
+        eps_F = [8*10^-2];
         max_iter = Inf;
         str_case = 'OBCL.mat';
     otherwise
