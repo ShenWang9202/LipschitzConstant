@@ -2,7 +2,7 @@ clc;
 clear;
 close all;
 
-inpNameIndex = 6;
+inpNameIndex = 3;
 switch inpNameIndex
     case 1
         disp('Threenodes.inp');
@@ -31,6 +31,10 @@ main_program_interval
 %% Find Lipschitz via point based (max mode and sqrt mode)
 % note that 1) the max mode should be close to anlytical solution 2) the
 % sqrt mode should be close to interval algebra result
+
+
+mode_point_based = 'sqrt';
+%mode_point_based = 'max';
 
 main_program_point_based
 

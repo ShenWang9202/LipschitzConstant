@@ -22,7 +22,7 @@ close all
 
 %Function mode
 %param.mode = 'sqrt';
-param.mode = 'max';
+param.mode = mode_point_based;
 
 %Set constant data
 %Set constant data
