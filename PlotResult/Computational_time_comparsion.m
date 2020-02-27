@@ -117,5 +117,6 @@ set(gca,'fontsize',fs);
 % title('CH-BnB', 'FontSize', 10);
 legend(h1,l,'Location','Best','FontSize',fs,'Interpreter','latex');
 legend boxoff;
+set(gca,'TickLabelInterpreter','latex')
 set(gcf,'PaperUnits','inches','PaperPosition',[0 0 13 7])
 print(h,'computational_time','-depsc2','-r300');
