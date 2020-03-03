@@ -11,7 +11,7 @@ clear;
 close all;
 
 
-for  inpNameIndex = 1:6
+for  inpNameIndex = 1:1
     switch inpNameIndex
         case 1
             disp('Threenodes.inp');

@@ -25,14 +25,16 @@ Nu = size(Du,1);
 %Create LD sequence of points
 if isequal(lds,'sobol') == 1
 %Create Sobol sequence 
-    Px = sobolset(Nx);
+    Px = sobolset(Nx,'Skip',1e3,'Leap',1e2);
 %     Pu = sobolset(Nu);
 elseif isequal(lds,'halton') == 1
 %Create Halton sequence 
-    Px = haltonset(Nx);
+    Px = haltonset(Nx,'Skip',1e3,'Leap',1e2);
+   % Px = haltonset(Nx);
 %     Pu = haltonset(Nu);
 elseif isequal(lds,'random') == 1
     Pxr = rand(1*sample_size,Nx);
+    %    Pxr = 0.5 * ones(1*sample_size,Nx);
 %     Pur = rand(1*sample_size,Nu);
 end
 

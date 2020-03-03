@@ -51,7 +51,8 @@ param.nonlinear_type = 12; %pipes and pumps
 param.case_study = case_study;
 
 %Number of points
-invalV = [1000 2000 3000 4000 5000 6000 7000 8000 9000 10000];
+%invalV = [50 100 200 400 800 1600 3200 6400 12800 25600];
+invalV = [10 100 1000 10000 100000];
 
 %Samples on each interval
 sample = 5;
